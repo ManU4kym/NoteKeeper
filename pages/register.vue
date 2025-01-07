@@ -57,3 +57,14 @@
         <!-- /Introduction -->
     </div>
 </template>
+
+
+
+<script setup>
+
+
+useHead({
+    title: 'Login'
+})
+
+</script>
