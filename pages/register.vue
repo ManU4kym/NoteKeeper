@@ -2,8 +2,26 @@
     <div class=" flex bg-black h-screen">
         <!-- side bar -->
 
-        <div class=" w-[516px] h-full bg-zinc-900">
+        <div class=" w-[516px] h-full bg-zinc-900 p-8">
             <Logo />
+            <h1 class="text-white font-bold text-lg mt-6">Sign up for a free account</h1>
+            <p class="text-zinc-300 text-sm leading-6">Already regitered? <span
+                    class=" font-bold text-[#FFAC00] underline">Log
+                    in</span> to
+                Your account
+            </p>
+            <div class="mt-11">
+                <label class="text-zinc-300  text-sm block mb-2 " for="">Email Address</label>
+                <input type="email " class="block w-full rounded-md text-white p-3 border border-[#3F3F46] bg-[#27272A]"
+                    placeholder="you@example.com">
+            </div>
+
+            <div class="mt-7">
+                <label class="text-zinc-300  text-sm block mb-2 " for="">Password</label>
+                <input type="password"
+                    class="block w-full rounded-md text-white p-3 border border-[#3F3F46] bg-[#27272A]"
+                    placeholder="*********">
+            </div>
         </div>
         <!-- /sidebar -->
 
