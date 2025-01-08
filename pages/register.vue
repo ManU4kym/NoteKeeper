@@ -72,8 +72,18 @@ useHead({
 const email = ref('')
 const password = ref('')
 
-function submit() {
+async function submit() {
     console.log(email.value, password.value)
+    const response = await $fetch('/api/user', {
+        method: 'POST',
+        body: {
+            email: email.value,
+            password: password.value
+        }
+    })
+
+    console.log(response)
 }
+
 
 </script>
