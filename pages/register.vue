@@ -63,10 +63,10 @@
 
 
 <script setup>
-
+import swal from 'sweetalert2'
 
 useHead({
-    title: 'Login'
+    title: 'Register'
 })
 
 const email = ref('')
@@ -87,7 +87,13 @@ async function submit() {
 
         // Check for 409 Conflict status and display a message
         if (e.response?.status === 409) {
-            alert('This email is already registered. Please use a different email.')
+            swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: e.response?._data?.message,
+                confirmButtonText: "Okay"
+
+            });
         } else {
             alert('An unexpected error occurred. Please try again later.')
         }
