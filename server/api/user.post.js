@@ -11,6 +11,7 @@ export default defineEventHandler ( async (event) => {
             
             email: body.email,
             password: hashedPassword,
+            salt: salt,
         },
     })
     
