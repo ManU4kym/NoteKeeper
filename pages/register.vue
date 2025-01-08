@@ -73,17 +73,25 @@ const email = ref('')
 const password = ref('')
 
 async function submit() {
-    console.log(email.value, password.value)
-    const response = await $fetch('/api/user', {
-        method: 'POST',
-        body: {
-            email: email.value,
-            password: password.value
+    try {
+        const response = await $fetch('/api/user', {
+            method: 'POST',
+            body: {
+                email: email.value,
+                password: password.value
+            }
+        })
+    } catch (e) {
+        console.log('ERROR:')
+        console.log(e.response)
+
+        // Check for 409 Conflict status and display a message
+        if (e.response?.status === 409) {
+            alert('This email is already registered. Please use a different email.')
+        } else {
+            alert('An unexpected error occurred. Please try again later.')
         }
-    })
-
-    console.log(response)
+    }
 }
-
 
 </script>
