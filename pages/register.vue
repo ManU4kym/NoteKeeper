@@ -11,24 +11,26 @@
                         in</span> to
                     Your account
                 </p>
-                <div class="mt-11">
-                    <label class="text-zinc-300  text-sm block mb-2 " for="">Email Address</label>
-                    <input type="email "
-                        class="block w-full rounded-md text-white p-2 border border-[#3F3F46] bg-[#27272A] placeholder:text-zinc-500"
-                        placeholder="you@example.com">
-                </div>
+                <form action="" @submit.prevent="submit">
+                    <div class="mt-11">
+                        <label class="text-zinc-300  text-sm block mb-2 " for="">Email Address</label>
+                        <input type="email " v-model="email"
+                            class="block w-full rounded-md text-white p-2 border border-[#3F3F46] bg-[#27272A] placeholder:text-zinc-500"
+                            placeholder="you@example.com">
+                    </div>
 
-                <div class="mt-7">
-                    <label class="text-zinc-300  text-sm block mb-2 " for="">Password</label>
-                    <input type="password"
-                        class="block w-full rounded-md text-white p-2 border border-[#3F3F46] bg-[#27272A] placeholder:text-zinc-500"
-                        placeholder="*********">
-                </div>
-                <div class="">
-                    <button class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
-                        <sign />
-                    </button>
-                </div>
+                    <div class="mt-7">
+                        <label class="text-zinc-300  text-sm block mb-2 " for="">Password</label>
+                        <input type="password" v-model="password"
+                            class="block w-full rounded-md text-white p-2 border border-[#3F3F46] bg-[#27272A] placeholder:text-zinc-500"
+                            placeholder="*********">
+                    </div>
+                    <div class="">
+                        <button class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
+                            <sign />
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- /sidebar -->
@@ -66,5 +68,12 @@
 useHead({
     title: 'Login'
 })
+
+const email = ref('')
+const password = ref('')
+
+function submit() {
+    console.log(email.value, password.value)
+}
 
 </script>
