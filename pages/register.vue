@@ -2,7 +2,7 @@
     <div class=" grid grid-cols-1 bg-zinc-900 h-1/2 md:bg-black md:h-full  md:flex md:h-screen">
         <!-- side bar -->
 
-        <div class=" w-[409px] md:w-[516px] h-full  bg-zinc-900 p-8">
+        <div class="  md:w-[516px] h-full  bg-zinc-900 p-8 flex flex-col justify-center">
             <div class=" p- m-[50px]">
                 <Logo />
                 <h1 class="text-white font-bold text-lg mt-6">Sign up for a free account</h1>
