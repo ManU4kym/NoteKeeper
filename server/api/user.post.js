@@ -1,11 +1,32 @@
 import prisma from "~/lib/prisma"
 import bcrypt from 'bcryptjs'
+import  validator from 'validator'
 
 export default defineEventHandler ( async (event) => {
     try {
         const body = await readBody(event)
+          if (!validator.isEmail(body.email)){
+            throw createError({
+                message: 'Invalid email format',
+                statusCode: 400,
+            })
+        }
+
+        if (!validator.isStrongPassword(body.password, {
+            minLength: 8,
+            minLowercase: 0,
+            minUppercase: 0,
+            minNumbers: 0,
+            minSymbols: 0,
+        })){
+            throw createError({
+                message: 'Password does not meet the required strength',
+                statusCode: 400,
+            })
+        }
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(body.password, salt)
+      
     
         await prisma.user.create({
             data: {
