@@ -29,8 +29,7 @@
 
                     </div>
                     <div class="">
-                        <button :disabled="isFormInvalid"
-                            class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
+                        <button class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
                             <sign />
                         </button>
                     </div>
