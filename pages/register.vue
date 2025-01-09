@@ -29,8 +29,7 @@
 
                     </div>
                     <div class="">
-                        <button :disabled="isFormInvalid"
-                            class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
+                        <button class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
                             <sign />
                         </button>
                     </div>
@@ -119,12 +118,16 @@ async function submit() {
 
         // Show success alert if registration is successful
 
-        swal.fire({
+        const { isConfirmed } = await swal.fire({
             icon: 'success',
             title: 'Registration Successful!',
             text: 'You have successfully created an account. Please check your email for verification.',
             confirmButtonText: 'Great'
         })
+
+        if (isConfirmed) {
+            navigateTo('/')
+        }
 
     } catch (e) {
         console.log('ERROR:')
