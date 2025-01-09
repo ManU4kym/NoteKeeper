@@ -17,6 +17,7 @@
                         <input type="email " v-model="email"
                             class="block w-full rounded-md text-white p-2 border border-[#3F3F46] bg-[#27272A] placeholder:text-zinc-500"
                             placeholder="you@example.com">
+                        <p v-if="emailError" class="text-red-500 text-sm mt-2">{{ emailError }}</p>
                     </div>
 
                     <div class="mt-7">
@@ -24,9 +25,12 @@
                         <input type="password" v-model="password"
                             class="block w-full rounded-md text-white p-2 border border-[#3F3F46] bg-[#27272A] placeholder:text-zinc-500"
                             placeholder="*********">
+                        <p v-if="passwordError" class="text-red-500 text-sm mt-2">{{ passwordError }}</p>
+
                     </div>
                     <div class="">
-                        <button class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
+                        <button :disabled="isFormInvalid"
+                            class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
                             <sign />
                         </button>
                     </div>
@@ -71,8 +75,37 @@ useHead({
 
 const email = ref('')
 const password = ref('')
+const emailError = ref('')
+const passwordError = ref('')
+
+const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+
+// Function to validate email format
+function validateEmail() {
+    if (!emailPattern.test(email.value)) {
+        emailError.value = 'Please enter a valid email address.'
+    } else {
+        emailError.value = ''
+    }
+}
+
+// Function to validate password length
+function validatePassword() {
+    if (password.value.length < 8) {
+        passwordError.value = 'Password must be at least 8 characters long.'
+    } else {
+        passwordError.value = ''
+    }
+}
 
 async function submit() {
+    // Perform final validation before submission
+    validateEmail()
+    validatePassword()
+
+    // If there are any errors, stop form submission
+    if (emailError.value || passwordError.value) return
+
     try {
         const response = await $fetch('/api/user', {
             method: 'POST',
@@ -81,6 +114,18 @@ async function submit() {
                 password: password.value
             }
         })
+
+
+
+        // Show success alert if registration is successful
+
+        swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: 'You have successfully created an account. Please check your email for verification.',
+            confirmButtonText: 'Great'
+        })
+
     } catch (e) {
         console.log('ERROR:')
         console.log(e.response)
@@ -88,14 +133,11 @@ async function submit() {
         // Check for 409 Conflict status and display a message
         if (e.response?.status === 409) {
             swal.fire({
-                icon: "error",
-                title: "Oops...",
+                icon: 'error',
+                title: 'Oops...',
                 text: e.response?._data?.message,
-                confirmButtonText: "Okay"
-
-            });
-        } else {
-            alert('An unexpected error occurred. Please try again later.')
+                confirmButtonText: 'Okay'
+            })
         }
     }
 }
