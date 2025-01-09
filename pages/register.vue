@@ -115,15 +115,17 @@ async function submit() {
             }
         })
 
+
+
         // Show success alert if registration is successful
-        if (response.status === 201) {
-            swal.fire({
-                icon: 'success',
-                title: 'Registration Successful!',
-                text: 'You have successfully created an account. Please check your email for verification.',
-                confirmButtonText: 'Great'
-            })
-        }
+
+        swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: 'You have successfully created an account. Please check your email for verification.',
+            confirmButtonText: 'Great'
+        })
+
     } catch (e) {
         console.log('ERROR:')
         console.log(e.response)
@@ -136,8 +138,6 @@ async function submit() {
                 text: e.response?._data?.message,
                 confirmButtonText: 'Okay'
             })
-        } else {
-            alert('An unexpected error occurred. Please try again later.')
         }
     }
 }
