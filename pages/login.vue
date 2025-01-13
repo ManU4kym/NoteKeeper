@@ -5,11 +5,10 @@
         <div class="  md:w-[516px] h-full  bg-zinc-900 p-8 flex flex-col justify-center">
             <div class=" p- m-[50px]">
                 <Logo />
-                <h1 class="text-white font-bold text-lg mt-6">Sign up for a free account</h1>
-                <p class="text-zinc-300 text-sm leading-6">Already regitered? <NuxtLink to="/login"
-                        class=" font-bold text-[#FFAC00] underline">Log
-                        in</NuxtLink> to
-                    Your account
+                <h1 class="text-white font-bold text-lg mt-6">Log in to your account</h1>
+                <p class="text-zinc-300 text-sm leading-6">Don't have an account? <NuxtLink to="/register"
+                        class=" font-bold text-[#FFAC00] underline">Sign
+                        up</NuxtLink> for one.
                 </p>
                 <form action="" @submit.prevent="submit">
                     <div class="mt-11">
@@ -30,15 +29,13 @@
                     </div>
                     <div class="">
                         <button class="bg-[#FFAC00]  font-bold w-full flex justify-center mt-8 p-4 rounded-3xl">
-                            <sign />
+                            <login />
                         </button>
                     </div>
                 </form>
             </div>
         </div>
         <!-- /sidebar -->
-
-
     </div>
 </template>
 
@@ -48,7 +45,7 @@
 import swal from 'sweetalert2'
 
 useHead({
-    title: 'Register'
+    title: 'Sign In'
 })
 
 const email = ref('')
@@ -85,7 +82,7 @@ async function submit() {
     if (emailError.value || passwordError.value) return
 
     try {
-        const response = await $fetch('/api/user', {
+        const response = await $fetch('/api/login', {
             method: 'POST',
             body: {
                 email: email.value,
@@ -99,8 +96,8 @@ async function submit() {
 
         const { isConfirmed } = await swal.fire({
             icon: 'success',
-            title: 'Registration Successful!',
-            text: 'You have successfully created an account. Please check your email for verification.',
+            title: 'Success',
+            text: 'Logged in successfully',
             confirmButtonText: 'Great'
         })
 
