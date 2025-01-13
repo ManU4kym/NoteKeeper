@@ -82,7 +82,7 @@ async function submit() {
     if (emailError.value || passwordError.value) return
 
     try {
-        const response = await $fetch('/api/user', {
+        const response = await $fetch('/api/login', {
             method: 'POST',
             body: {
                 email: email.value,
@@ -96,8 +96,8 @@ async function submit() {
 
         const { isConfirmed } = await swal.fire({
             icon: 'success',
-            title: 'Registration Successful!',
-            text: 'You have successfully created an account. Please check your email for verification.',
+            title: 'Success',
+            text: 'Logged in successfully',
             confirmButtonText: 'Great'
         })
 
